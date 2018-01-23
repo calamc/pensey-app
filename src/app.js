@@ -24,19 +24,7 @@ import getVisibleExpenses from './selectors/expenses'
 const store = configureStore();
 
 // Test variables for list population
-store.dispatch(addExpense({ description: 'Electricity bill', amount: 65000}));
-store.dispatch(addExpense({ description: 'Printing', amount: 65000}));
-store.dispatch(addExpense({ description: 'Sky broadband', amount: 65000}));
-store.dispatch(addExpense({ description: 'Oil bill', createdAt: 190500}));
-store.dispatch(addExpense({ description: 'Rent', amount: 111188, createdAt: 13500}));
-store.dispatch(addExpense({ description: 'Virgin Media', amount: 165000}));
-store.dispatch(addExpense({ description: 'TV License', amount: 255000}));
-
-
 // Get the state of the store
-const state = store.getState();
-const visibleExpenses = getVisibleExpenses(state.expenses,state.filters);
-console.log(visibleExpenses);
 
 const jsx = (
     <Provider store={store}>
