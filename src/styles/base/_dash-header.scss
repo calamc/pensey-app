@@ -1,0 +1,17 @@
+.dash-header {
+    background: $grey-light;
+    padding: $large-s 0;
+    margin-bottom: $large-s;
+}
+
+.dash-header__title {
+    margin: 0;
+    font-weight: 300;
+    span {
+        font-weight: bold;
+    }
+}
+
+.dash-header__createexp {
+    margin-top: $medium-s;
+}

@@ -1,0 +1,11 @@
+.for-phone {
+    @media (min-width: 45rem) {
+        display: none;
+    } 
+}
+
+.for-computer {
+    @media (max-width: 45rem) {
+        display: none;
+    }
+}

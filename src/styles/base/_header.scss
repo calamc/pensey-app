@@ -1,0 +1,31 @@
+.header {
+    background: $grey-primary;
+}
+
+.header__title {
+    color: $white;
+    text-decoration: none;
+    h1 {
+        margin: 0;
+    }
+}
+
+.header__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $small-s 0;
+    font-size: $font-m;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+.header a:visited {
+    color: $white;
+}
+
+.header a:hover {
+    color: $pink;
+}
