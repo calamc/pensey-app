@@ -18,6 +18,15 @@
     font-size: $font-m;
 }
 
+.header__links {
+    display: flex;
+    flex-direction: row;
+}
+
+.header__links--link {
+    padding-left: $medium-s;
+}
+
 .header a {
     text-decoration: none;
 }

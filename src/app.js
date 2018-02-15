@@ -19,6 +19,8 @@ import {setTextFilter} from './actions/filters'
 // SELECTORS (FILTERS)
 import getVisibleExpenses from './selectors/expenses'
 
+import './firebase/firebase'
+
 
 // Create redux store
 const store = configureStore();

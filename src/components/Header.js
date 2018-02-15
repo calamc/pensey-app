@@ -5,9 +5,13 @@ const Header = () => (
     <header className="header">
     <div className="content">
         <div className="header__content">
-            <NavLink to="/" className="header__title" exact={true}><h1>Pensey</h1></NavLink>
-                <NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>
-                <NavLink to="/FAQ" activeClassName="is-active">FAQ</NavLink>
+                <NavLink to="/" className="header__title" exact={true}><h1>Pensey</h1></NavLink>
+                    <div className="header__links">
+                        <NavLink to="/create" className="header__links--link" activeClassName="is-active">Create Expense</NavLink>
+                        <NavLink to="/create" className="header__links--link" activeClassName="is-active">Receipts</NavLink>
+                        <NavLink to="/create" className="header__links--link" activeClassName="is-active">Trips</NavLink>
+                        <NavLink to="/FAQ" className="header__links--link" activeClassName="is-active">FAQ</NavLink>
+                    </div>
         </div>
     </div>
     </header>
