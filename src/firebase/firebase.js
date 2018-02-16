@@ -11,6 +11,44 @@ const config = {
 
   firebase.initializeApp(config);
 
-  firebase.database().ref().set({
-    name: 'Cathal'
+  const database = firebase.database();
+
+//   database.ref('isSingle').remove().then(() => {
+//     console.log('REMOVED');
+//   }).catch((e) => {
+//       console.log('DIDNT WORK', e);
+//   });
+
+  database.ref().set({
+    name: 'Cathal',
+    age: 24,
+    isSingle: false,
+    location: {
+        city: 'Longford',
+        country: 'IE'
+    }
+  }).then(() => {
+      console.log('Saved data');
+  }).catch((e) => {
+    console.log('Failed data', e);
   });
+
+  database.ref('age').set(28);
+  database.ref('location/city').set('Sligo');
+
+  // att
+  database.ref('att').set({
+    height: 88,
+    weight: 145
+  }).then(() => {
+      console.log('2nd worked');
+  }).catch((e) => {
+    console.log('Didnt work for 2nd err');
+  });
+
+
+  // remove data
+//   database.ref('isSingle').set(null);
+
+
+
