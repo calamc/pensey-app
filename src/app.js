@@ -13,7 +13,7 @@ import {Provider} from 'react-redux'
 import configureStore from './store/configureStore'
 
 // ACTIONS
-import {addExpense} from './actions/expenses'
+import {startSetExpenses} from './actions/expenses'
 import {setTextFilter} from './actions/filters'
 
 // SELECTORS (FILTERS)
@@ -35,5 +35,9 @@ const jsx = (
     
 );
 
-// Render Pensey to the screen
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Expenses loading</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(() => {
+    // Render Pensey to the screen
+    ReactDOM.render(jsx, document.getElementById('app'));
+});
