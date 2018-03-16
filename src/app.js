@@ -6,7 +6,7 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css'
 
 // ROUTES
-import AppRouter from './routers/AppRouter.js'
+import AppRouter, { history } from './routers/AppRouter.js'
 
 // REDUX PROVIDER FOR THE REDUX STORE - manages our expenses and filters
 import {Provider} from 'react-redux'
@@ -19,7 +19,10 @@ import {setTextFilter} from './actions/filters'
 // SELECTORS (FILTERS)
 import getVisibleExpenses from './selectors/expenses'
 
-import './firebase/firebase'
+import { firebase } from './firebase/firebase'
+
+// IMPORT LOGIN & LOGOUT
+import { login, logout } from './actions/authentication'
 
 
 // Create redux store
@@ -27,7 +30,6 @@ const store = configureStore();
 
 // Test variables for list population
 // Get the state of the store
-
 const jsx = (
     <Provider store={store}>
         <AppRouter/>
@@ -35,9 +37,34 @@ const jsx = (
     
 );
 
+// MAKE SURE APP ONLY RENDERS A SINGLE TIME
+let hasRend = false;
+const renderApp = () => {
+    if (!hasRend) {
+        ReactDOM.render(jsx, document.getElementById('app'));
+        hasRend = true;
+    }
+};
+
 ReactDOM.render(<p>Expenses loading</p>, document.getElementById('app'));
 
-store.dispatch(startSetExpenses()).then(() => {
-    // Render Pensey to the screen
-    ReactDOM.render(jsx, document.getElementById('app'));
+
+
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log('Hello, you are logged in');
+        store.dispatch(login(user.uid));
+        store.dispatch(startSetExpenses()).then(() => {
+            // Render Pensey to the screen
+            renderApp();
+            if (history.location.pathname === '/') {
+                history.push('/dashboard');
+            } 
+        });
+    } else {
+        console.log('Goodbye, logged out');
+        store.dispatch(logout());
+        renderApp();
+        history.push('/');
+    }
 });
