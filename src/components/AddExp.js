@@ -19,7 +19,9 @@ export class AddExp extends React.Component {
                     </div>
                 </div>
             <div className="content">
-                <ExpenseForm onSubmit={this.onSubmit}/>
+                <ExpenseForm 
+                path={this.props.location.pathname}
+                onSubmit={this.onSubmit}/>
             </div>
         </div>
         )

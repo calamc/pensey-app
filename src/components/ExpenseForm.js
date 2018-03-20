@@ -95,7 +95,11 @@ export default class ExpenseForm extends React.Component {
                     />
                     <textarea className="text-area" placeholder="Add more detail for expense" value={this.state.note} onChange={this.onNoteChange}></textarea>
                     <div>
-                        <button className="btn">Save your expense.</button>
+                        <button className="btn">
+                            {/*Passed down the path prop in AddExp.js compnent
+                            So I have access to the path location for create/update view*/}
+                            {this.props.path ? "Create new expense" : "Update expense"}
+                        </button>
                     </div>
                 </form>
         )
