@@ -9,11 +9,15 @@ import numeral from 'numeral'
 import moment from 'moment'
 import '../locales/locales'
 
-const ExpListItem = ({id, description, amount, createdAt }) => (
+const ExpListItem = ({id, title, amount, createdAt, category, km }) => (
         <Link className="list-item" to={`/edit/${id}`}>
-        <div><h1 className="list-item__title">{description}</h1><span
-        className="list-item__sub">{moment(createdAt).format('DD MMMM YY')}</span></div>
-        <h3 className="list-item__numerical"><span>€</span>{numeral(amount / 100).format('0,0.00')}</h3>
+        <div>
+                <h1 className="list-item__title">{title}</h1>
+                <span className="list-item__sub">{moment(createdAt).format('DD MMMM YY')}</span><br/>
+                <span className="list-item__sub">Kilometres: {km}</span><br/>
+                <span className="list-item__sub">Category: {category}</span>
+        </div>
+                <h3 className="list-item__numerical"><span>€ </span>{numeral(amount / 100).format('0,0.00')}</h3>
         </Link>
 );
 

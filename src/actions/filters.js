@@ -25,3 +25,9 @@ export const setEndDate = (endDate) => ({
     type: 'SET_END_DATE',
     endDate
 });
+
+// Chart switch
+export const setChartToggle = (chartToggle) => ({
+    type: 'SET_CHART_TOGGLE',
+    chartToggle
+});

@@ -18,12 +18,14 @@ export const startAddExp = (expenseData = {}) => {
         // get user id for firebase expense personal
         const uid = getState().authentication.uid;
         const {
-            description = '', 
-            note = '', 
-            amount = 0, 
-            createdAt = 0
+            title = '',
+            details = '',
+            amount = 0,
+            createdAt = 0,
+            category = '',
+            km = 0
         } = expenseData;
-        const expense = { description, note, amount, createdAt };
+        const expense = { title, details, amount, createdAt, category, km };
         database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
             dispatch(addExpense({
                 id: ref.key,
@@ -71,11 +73,11 @@ export const setExpenses = (expenses) => ({
     expenses
 });
 
-// ASYNC ACTION
+// async action
 export const startSetExpenses = () => {
     return (dispatch, getState) => {
         const uid = getState().authentication.uid;
-        // load specific logged in user expenses
+        // load specific uid logged in user expenses
         return database.ref(`users/${uid}/expenses`).once('value').then((snapshot) => {
             const expenses = [];
 

@@ -10,3 +10,19 @@
     text-decoration: none;
     line-height: 1;
 }
+
+.btn-space__bottom {
+    margin-bottom: 5rem;
+}
+
+.btn__logout {
+    background: $pink;
+    color: $white;
+    border: none;
+    padding: .5rem 1rem;
+    font-weight: 400;
+    font-size: $font-s;
+    font-family: $font-primary;
+    display: inline-block;
+    text-decoration: none;
+}

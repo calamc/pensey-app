@@ -17,10 +17,16 @@ export default class ExpenseForm extends React.Component {
         super(props);
         
         this.state = {
-            description: props.expense ? props.expense.description : '',
-            note: props.expense ? props.expense.note : '',
+            title: props.expense ? props.expense.title : '',
+            details: props.expense ? props.expense.details : '',
             amount: props.expense ? (props.expense.amount / 100).toString() : '',
             createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+            category: props.expense ? props.expense.category : 'travel',
+            km: props.expense ? (props.expense.km / 100).toString() : '',
+            // receiptURL: props.expense ? props.expense.receiptURL : '',
+            // isUploading: false,
+            // progress: 0,
+            // avatarURL: '',
             calFocused: false
         };
     }
@@ -32,16 +38,22 @@ export default class ExpenseForm extends React.Component {
         this.setState(() => ({ calFocused: focused}))
     };
 
-    // Description
-    onDescriptionChange = (e) => {
-        const description = e.target.value;
-        this.setState(() => ({ description}))
+    // Title
+    onTitleChange = (e) => {
+        const title = e.target.value;
+        this.setState(() => ({ title }))
     };
 
-    // Notes
-    onNoteChange = (e) => {
-        const note = e.target.value;
-        this.setState(() => ({ note }));
+    // Details
+    onDetailsChange = (e) => {
+        const details = e.target.value;
+        this.setState(() => ({ details }));
+    };
+
+    // Category
+    onCategoryChange = (e) => {
+        const category = e.target.value;
+        this.setState(() => ({ category }));
     };
 
     // Amount €
@@ -53,6 +65,13 @@ export default class ExpenseForm extends React.Component {
         }
     };
 
+    // Amount €
+    onKmChange = (e) => {
+        const km = e.target.value;
+
+            this.setState(() => ({ km }));
+    };
+
     // Date range
     onDateChange = (createdAt) => {
         if (createdAt) {
@@ -60,30 +79,31 @@ export default class ExpenseForm extends React.Component {
         }
    };
 
-   // Form submit
+   // handle the form submission
    onSubmit = (e) => {
     e.preventDefault();
-
-    // Handle form submission
-    if (!this.state.description || !this.state.amount) {
-        this.setState(() => ({ error: 'No description or amount entered. Please try again'}))
+    if (!this.state.title || !this.state.amount) {
+        this.setState(() => ({ error: 'Please enter expense title and amount.'}))
     } else {
-        this.setState(() => ({ error: 'Expense saved!' }));
+        this.setState(() => ({ error: 'Expense has not been saved!' }));
         this.props.onSubmit({
-            description: this.state.description,
+            title: this.state.title,
             amount: parseFloat(this.state.amount, 10) * 100, // gets rid of decimals
             createdAt: this.state.createdAt.valueOf(),
-            note: this.state.note
+            details: this.state.details,
+            category: this.state.category,
+            km: parseFloat(this.state.km, 10) * 100 // gets rid of decimals
+            // receiptURL: this.state.receiptURL
         });
     }
    };
    render() {
-        return (
-                
+        return ( 
                 <form className="form" onSubmit={this.onSubmit}>
                 {this.state.error && <p className="form__error">{this.state.error}</p>}
-                    <input className="text-input" type="text" placeholder="Desc" value={this.state.description} onChange={this.onDescriptionChange} autoFocus/>
+                    <input className="text-input" type="text" placeholder="Title" value={this.state.title} onChange={this.onTitleChange} autoFocus/>
                     <input className="text-input" type="text" placeholder="Amount" value={this.state.amount} onChange={this.onAmountChange} />
+                    <input className="text-input" type="text" placeholder="Kms" value={this.state.km} onChange={this.onKmChange} />
                     <SingleDatePicker
                         showClearDate={true}   
                         date={this.state.createdAt}
@@ -93,9 +113,17 @@ export default class ExpenseForm extends React.Component {
                         numberOfMonths={1}
                         isOutsideRange={() => false}
                     />
-                    <textarea className="text-area" placeholder="Add more detail for expense" value={this.state.note} onChange={this.onNoteChange}></textarea>
-                    <div>
-                        <button className="btn">
+                    <label>
+                        Type of expense:
+                        <select value={this.state.category} onChange={this.onCategoryChange}>
+                            <option value="travel">Travel</option>
+                            <option value="meeting">Meeting</option>
+                            <option value="food-and-drink">Food and Drink</option>
+                        </select>
+                    </label>
+                    <textarea className="text-area" placeholder="You can add extra details about your expense in here." value={this.state.details} onChange={this.onDetailsChange}></textarea>
+                    <div className="">
+                        <button className="btn btn-space__bottom">
                             {/*Passed down the path prop in AddExp.js compnent
                             So I have access to the path location for create/update view*/}
                             {this.props.path ? "Create new expense" : "Update expense"}

@@ -1,0 +1,23 @@
+.footer {
+    background: $grey-primary;
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+}
+
+.footer__content {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: $small-s 0;
+
+    img {
+        width: 2%;
+        height: 2%;
+    }
+}
+
+.footer__text {
+    color: $pink;
+    font-size: $font-extra-s;
+}

@@ -36,6 +36,11 @@ export default (state = filtersReducerDefaultState, action) => {
                 ...state,
                 endDate: action.endDate
             };
+        case 'SET_CHART_TOGGLE':
+        return {
+            ...state,
+            chartToggle: !state.chartToggle
+        };
         default:
     return state;
     }

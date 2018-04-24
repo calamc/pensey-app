@@ -1,0 +1,29 @@
+.boxed {
+  align-items: center;
+  background: url('/img/money-bg.jpg');
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+}
+
+.boxed__center {
+  background: #fff;
+  width: 30rem;
+  padding: $large-s;
+  text-align: center;
+}
+
+.btn__large {
+  padding: $medium-s $small-s;
+}
+
+.boxed__text {
+  font-size: $font-m;
+}
+
+.boxed__text--title {
+  padding: $large-s $small-s;
+  line-height: 1;
+}

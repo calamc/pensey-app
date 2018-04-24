@@ -1,8 +1,13 @@
 import { firebase, googleProvider } from '../firebase/firebase'
 
-export const login = (uid) => ({
+// export const login = (uid, photoURL, displayName, email) => ({
+//     type: 'LOGIN',
+//     uid, photoURL, displayName, email
+// });
+
+export const login = user => ({
     type: 'LOGIN',
-    uid
+    user
 });
 
 // NAMED EXPORT
@@ -14,6 +19,18 @@ export const startLogin = () => {
         return firebase.auth().signInWithPopup(googleProvider);
     };
 };
+
+// export const startLogin = () => {
+//     return firebase.auth().onAuthStateChanged((user) => {
+//         if (user != null) {
+//             user.providerData.forEach((profile) => {
+//                 console.log("Sign in: " + profile.providerId);
+//             })
+//         } else {
+//             return firebase.auth().signInWithPopup(googleProvider);
+//         }
+//     })
+// }
 
 export const logout = () => ({
     type: 'LOGOUT'

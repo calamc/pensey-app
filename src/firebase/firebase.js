@@ -63,5 +63,45 @@ export { firebase, googleProvider, database as default };
 //   console.log('Error', e);
 // });
 
-
+// {
+//   "rules": {
+//     ".read": true,
+//     ".write": true,
+//       "users": {
+//         "$user_id": {
+//           ".read": "$user_id === auth.uid",
+//           ".write": "$user_id === auth.uid",
+//             "expenses": {
+//               "$expense_id": {
+//                 ".validate": "newData.hasChildren(['title', 'amount', 'details', 'createdAt', 'category', 'km'])",
+//                   "title": {
+//                     ".validate": "newData.isString() && newData.val().length > 0"
+//                   },
+//                   "amount": {
+//                     ".validate": "newData.isNumber()"
+//                   },
+//                   "details": {
+//                     ".validate": "newData.isString()"
+//                   },
+//                   "createdAt": {
+//                     ".validate": "newData.isNumber()"
+//                   },
+//                   "category": {
+//                     ".validate": "newData.isString()"
+//                   },
+//                   "km": {
+//                     ".validate": "newData.isString()"
+//                   },
+//                   "$other": {
+//               			".validate": false
+//             			}      
+//               }
+//             },
+//             "$other": {
+//               ".validate": false
+//             }
+//         }
+//       }
+//   }
+// }
 

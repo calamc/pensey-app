@@ -5,8 +5,14 @@ import { startLogin } from '../actions/authentication'
 
 // LOGIN COMPONENT { GOOGLE AUTH }
 export const Login = ({ startLogin }) => (
-    <div>
-        <button onClick={startLogin}>Login</button>
+    <div className="boxed">
+        <div className="boxed__center">
+            <div className="boxed__text">
+                <h1>Pensey</h1>
+                <p className="boxed__text--title">Manage all your expenses.</p>
+                <button className="btn btn__large" onClick={startLogin}>Login using Google Account</button>
+            </div>
+        </div>
     </div>
 );
 

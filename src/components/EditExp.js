@@ -19,12 +19,12 @@ export class EditExp extends React.Component {
         <div>
         <div className="dash-header">
             <div className="content">
-                <h1 className="dash-header__title">Edit expense</h1>
+                <h1 className="dash-header__title">Edit/Update your expense</h1>
             </div>
         </div>
         <div className="content">
         <ExpenseForm expense={this.props.expense} onSubmit={this.onSubmit}/>
-            <button className="btn btn--secondary-x" onClick={this.onRemove}>Delete</button>
+            <button className="btn btn--secondary-x btn-space__bottom" onClick={this.onRemove}>Delete Expense</button>
             </div>
         </div>
         );

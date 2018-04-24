@@ -10,6 +10,7 @@ import Header from '../components/Header'
 import Login from '../components/Login'
 import PrivateRoute from './PrivateRoutes'
 import PublicRoute from './PublicRoutes'
+import Footer from '../components/Footer'
 
 import createHistory from 'history/createBrowserHistory';
 

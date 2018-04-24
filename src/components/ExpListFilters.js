@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // IMPORT filters
-import { setTextFilter, sortByAmount, sortByDate, setStartDate, setEndDate } from '../actions/filters'
+import { setTextFilter, sortByAmount, sortByDate, setStartDate, setEndDate, setChartToggle } from '../actions/filters'
 
 // IMPORT styles
 import { DateRangePicker } from 'react-dates'
@@ -35,6 +35,12 @@ class ExpListFilters extends React.Component {
         this.setState(() => ({ calendarFocused }));
     };
 
+    // chart.js 
+    // toggle button
+    onChartClick = () => {
+        this.props.setChartToggle(this.props.filters.chartToggle);
+    };
+
     render() {
         return (
             <div className="content">
@@ -57,11 +63,20 @@ class ExpListFilters extends React.Component {
                     </select>
                     </div>
                     <div className="in-group__item search-box">
-                        <input placeholder="Search for your expenses" 
+                        <input placeholder="Start typing to search expenses" 
                                 className="text-input" 
                                 type="text" 
                                 value={this.props.filters.text} 
                                 onChange={this.onTextChanged}/>
+                    </div>
+                    <div className="in-group__item">
+                        <button className="btn" onClick={this.onChartClick}>
+                        {/*Shows different button depending on filters chart state*/}
+                            {!this.props.filters.chartToggle ? 
+                                <span>Line Chart</span> : 
+                                <span>Expense List</span>
+                            }
+                        </button>
                     </div>
                 </div>
             </div>
@@ -81,7 +96,8 @@ const mapDispatchToProps = (dispatch) => ({
     sortByDate: () => dispatch(sortByDate()),
     setStartDate: (startDate) => dispatch(setStartDate(startDate)),
     setEndDate: (endDate) => dispatch(setEndDate(endDate)),
-    setTextFilter: (text) => dispatch(setTextFilter(text))
+    setTextFilter: (text) => dispatch(setTextFilter(text)),
+    setChartToggle: (chartToggle) => dispatch(setChartToggle(chartToggle))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpListFilters);

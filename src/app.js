@@ -24,6 +24,9 @@ import { firebase } from './firebase/firebase'
 // IMPORT LOGIN & LOGOUT
 import { login, logout } from './actions/authentication'
 
+// IMPORT LOADER GIF
+import LoaderGif from './components/Loader'
+
 
 // Create redux store
 const store = configureStore();
@@ -46,14 +49,15 @@ const renderApp = () => {
     }
 };
 
-ReactDOM.render(<p>Expenses loading</p>, document.getElementById('app'));
+ReactDOM.render(<LoaderGif />, document.getElementById('app'));
 
 
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         console.log('Hello, you are logged in');
-        store.dispatch(login(user.uid));
+        // store.dispatch(login(user.uid));
+        store.dispatch(login(user));
         store.dispatch(startSetExpenses()).then(() => {
             // Render Pensey to the screen
             renderApp();

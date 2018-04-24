@@ -15,7 +15,7 @@ export class AddExp extends React.Component {
             <div>
                 <div className="dash-header">
                     <div className="content">
-                        <h1 className="dash-header__title">Pensey: Add Expense</h1>
+                        <h1 className="dash-header__title">Create your new expense</h1>
                     </div>
                 </div>
             <div className="content">
@@ -38,7 +38,7 @@ export default connect(undefined, mapDispatchToProps)(AddExp);
 //     <div>
 //     <div className="dash-header">
 //         <div className="content">
-//             <h1 className="dash-header__title">Pensey: Add Expense</h1>
+//             <h1 className="dash-header__title">Pensey: Create Expense</h1>
 //         </div>
 //     </div>
 //         <div className="content">
