@@ -52,8 +52,11 @@ export default class ExpenseForm extends React.Component {
 
     // Category
     onCategoryChange = (e) => {
-        const category = e.target.value;
-        this.setState(() => ({ category }));
+        const { selectedIndex } = e.target;
+        const text = e.target.options[selectedIndex].innerHTML;
+        this.setState({ category: text })
+        // const category = e.target.value;
+        // this.setState(() => ({ category }));
     };
 
     // Amount €
@@ -113,9 +116,9 @@ export default class ExpenseForm extends React.Component {
                         numberOfMonths={1}
                         isOutsideRange={() => false}
                     />
-                    <label>
+                    <label className="text-input">
                         Type of expense:
-                        <select value={this.state.category} onChange={this.onCategoryChange}>
+                        <select className="drop-down" onChange={this.onCategoryChange}>
                             <option value="travel">Travel</option>
                             <option value="meeting">Meeting</option>
                             <option value="food-and-drink">Food and Drink</option>
@@ -123,7 +126,7 @@ export default class ExpenseForm extends React.Component {
                     </label>
                     <textarea className="text-area" placeholder="You can add extra details about your expense in here." value={this.state.details} onChange={this.onDetailsChange}></textarea>
                     <div className="">
-                        <button className="btn btn-space__bottom">
+                        <button className="btn">
                             {/*Passed down the path prop in AddExp.js compnent
                             So I have access to the path location for create/update view*/}
                             {this.props.path ? "Create new expense" : "Update expense"}

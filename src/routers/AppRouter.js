@@ -11,6 +11,7 @@ import Login from '../components/Login'
 import PrivateRoute from './PrivateRoutes'
 import PublicRoute from './PublicRoutes'
 import Footer from '../components/Footer'
+import Analytics from '../components/Analytics'
 
 import createHistory from 'history/createBrowserHistory';
 
@@ -24,6 +25,7 @@ const AppRouter = () => (
                     <PrivateRoute path="/dashboard" component={Dashboard} />
                     <PrivateRoute path="/create" component={AddExp}/>
                     <PrivateRoute path="/edit/:id" component={EditExp}/>
+                    <PrivateRoute path="/analytics" component={Analytics}/>
                     <Route path="/FAQ" component={FAQ}/>
                     <Route component={NotFound} />
                 </Switch>

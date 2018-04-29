@@ -69,7 +69,7 @@ class ExpListFilters extends React.Component {
                                 value={this.props.filters.text} 
                                 onChange={this.onTextChanged}/>
                     </div>
-                    <div className="in-group__item">
+                    <div className="in-group__item in-group__item--btn">
                         <button className="btn" onClick={this.onChartClick}>
                         {/*Shows different button depending on filters chart state*/}
                             {!this.props.filters.chartToggle ? 

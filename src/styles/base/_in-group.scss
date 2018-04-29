@@ -12,3 +12,20 @@
 
     
 }
+
+.in-group__item--btn {
+    margin: 0;
+}
+
+.drop-down {
+    background-image: url('/img/arrow.png');
+    background-position: center right;
+    background-repeat: no-repeat;
+    padding: $small-s;
+    border-radius: 2px;
+    margin: 0;
+
+    option {
+        font-family: inherit;
+    }
+}

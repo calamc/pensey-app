@@ -14,7 +14,7 @@ const ExpListItem = ({id, title, amount, createdAt, category, km }) => (
         <div>
                 <h1 className="list-item__title">{title}</h1>
                 <span className="list-item__sub">{moment(createdAt).format('DD MMMM YY')}</span><br/>
-                <span className="list-item__sub">Kilometres: {km}</span><br/>
+                <span className="list-item__sub">{numeral(km / 100).format('0,0')}km</span><br/>
                 <span className="list-item__sub">Category: {category}</span>
         </div>
                 <h3 className="list-item__numerical"><span>€ </span>{numeral(amount / 100).format('0,0.00')}</h3>
