@@ -14,6 +14,8 @@ export default (expenses, { text, sortBy, startDate, endDate}) => {
             return a.createdAt < b.createdAt ? 1 : -1; // ascending or descending sort order
         } else if (sortBy === 'amount') {
             return a.amount < b.amount ? 1 : -1;
+        } else if (sortBy === 'km') {
+            return a.km < b.km ? 1 : -1;
         }
     });
 };

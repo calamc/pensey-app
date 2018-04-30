@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // IMPORT filters
-import { setTextFilter, sortByAmount, sortByDate, setStartDate, setEndDate, setChartToggle } from '../actions/filters'
+import { setTextFilter, sortByAmount, sortByDate, sortByKm, setStartDate, setEndDate, setChartToggle } from '../actions/filters'
 
 // IMPORT styles
 import { DateRangePicker } from 'react-dates'
@@ -17,11 +17,14 @@ class ExpListFilters extends React.Component {
         this.props.setTextFilter(e.target.value);
     };
 
+    // sortby for amount, date and kilometres
     onSortChanged = (e) => {
         if (e.target.value === 'date') {
             this.props.sortByDate();
         } else if (e.target.value === 'amount') {
             this.props.sortByAmount();
+        } else if (e.target.value === 'km') {
+            this.props.sortByKm();
         }
     };
 
@@ -60,6 +63,7 @@ class ExpListFilters extends React.Component {
                     <select className="select" value={this.props.filters.sortBy} onChange={this.onSortChanged}>
                         <option value="date">Date</option>
                         <option value="amount">Amount</option>
+                        <option value="km">Kilometres</option>
                     </select>
                     </div>
                     <div className="in-group__item search-box">
@@ -94,6 +98,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     sortByAmount: () => dispatch(sortByAmount()),
     sortByDate: () => dispatch(sortByDate()),
+    sortByKm: () => dispatch(sortByKm()),
     setStartDate: (startDate) => dispatch(setStartDate(startDate)),
     setEndDate: (endDate) => dispatch(setEndDate(endDate)),
     setTextFilter: (text) => dispatch(setTextFilter(text)),

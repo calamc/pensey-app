@@ -14,6 +14,11 @@ export const sortByDate = () => ({
     type: 'SORT_BY_DATE'
 });
 
+// Sort by kilometres
+export const sortByKm = () => ({
+    type: 'SORT_BY_KM'
+});
+
 // Set the start date
 export const setStartDate = (startDate) => ({
     type: 'SET_START_DATE',
