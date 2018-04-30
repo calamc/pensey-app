@@ -11,8 +11,13 @@ import moment from 'moment'
 const timenow = moment();
 console.log(timenow.format('Do MMM YY')); // Checks it works
 
+// Import firebase react file uploader for receipts
+import FileUploader from 'react-firebase-file-uploader'
+import { connect } from 'react-redux'
+import { firebase } from '../firebase/firebase'
+
 // Expense form
-export default class ExpenseForm extends React.Component {
+export class ExpenseForm extends React.Component {
     constructor(props) {
         super(props);
         
@@ -23,10 +28,11 @@ export default class ExpenseForm extends React.Component {
             createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
             category: props.expense ? props.expense.category : 'travel',
             km: props.expense ? (props.expense.km / 100).toString() : '',
-            // receiptURL: props.expense ? props.expense.receiptURL : '',
-            // isUploading: false,
-            // progress: 0,
-            // avatarURL: '',
+            receiptURL: props.expense ? props.expense.receiptURL : '',
+            isUploading: false,
+            progress: 0,
+            avatarURL: '',
+            avatar: '',
             calFocused: false
         };
     }
@@ -82,6 +88,43 @@ export default class ExpenseForm extends React.Component {
         }
    };
 
+   // file uploader handling
+   // from NPM react-firebase-file-uploader docs
+   onUploadStart = (e) => {
+    this.setState({
+        isUploading: true,
+        progress: 0
+    });
+   };
+
+   handleProgress = (progress) => this.setState({ progress });
+   handleUploadError = (error) => {
+       this.setState({ isUploading: false });
+       console.error(error);
+   }
+   // Uploading to firebase storage
+   handleUploadSuccess = (filename) => {
+    this.setState({avatar: filename, progress: 100, isUploading: false});
+    firebase.storage().ref(`images/${this.state.uid}`).child(filename).getDownloadURL().then(url => this.setState({receiptURL: url}));
+  };
+
+  // display recipt
+  showReceipt = () => {
+      return (<a href={this.state.receiptURL}></a>);
+  }
+
+  // delete receipt
+  deleteReceipt = () => {
+      const receiptURL = this.state.receiptURL;
+      const firebaseStorage = firebase.storage();
+
+      firebaseStorage.ref().child(`${receiptURL}`).delete().then(() => {
+          console.log(`${receiptURL} deleted!`)
+      }).catch((e) => {
+          console.log('Error showing is: ', e)
+      })
+  }
+
    // handle the form submission
    onSubmit = (e) => {
     e.preventDefault();
@@ -95,8 +138,8 @@ export default class ExpenseForm extends React.Component {
             createdAt: this.state.createdAt.valueOf(),
             details: this.state.details,
             category: this.state.category,
-            km: parseFloat(this.state.km, 10) * 100 // gets rid of decimals
-            // receiptURL: this.state.receiptURL
+            km: parseFloat(this.state.km, 10) * 100, // gets rid of decimals
+            receiptURL: this.state.receiptURL
         });
     }
    };
@@ -124,6 +167,26 @@ export default class ExpenseForm extends React.Component {
                             <option value="food-and-drink">Food and Drink</option>
                         </select>
                     </label>
+                    <div>
+                    {/*Handle receipt upload*/}
+                        <label className="receipt-btn btn">
+                            {this.state.isUploading ? 'Receipt is uploading. Please wait' : 'Upload Receipt'}
+                            {this.state.isUploading && <p>Progress: {this.state.progress} percent</p>}
+                            <FileUploader
+                                accept="image/*" 
+                                name="avatar" 
+                                randomizeFilename={false}
+                                onUploadStart={this.onUploadStart}
+                                onUploadError={this.handleUploadError}
+                                onUploadSuccess={this.handleUploadSuccess}
+                                onProgress={this.handleProgress}
+                                storageRef={firebase.storage().ref(`images/${this.state.uid}`)}
+                            />
+                        </label>
+                        <div>
+                            {this.state.receiptURL ? <a href={this.state.receiptURL}><img alt="Receipt" onClick={this.showReceipt} src={this.state.receiptURL} className="receipt"/></a> : <p>No Receipts added yet.</p>}
+                        </div>
+                    </div>
                     <textarea className="text-area" placeholder="You can add extra details about your expense in here." value={this.state.details} onChange={this.onDetailsChange}></textarea>
                     <div className="">
                         <button className="btn">
@@ -136,3 +199,9 @@ export default class ExpenseForm extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    uid: state.authentication.uid
+})
+
+export default connect(mapStateToProps)(ExpenseForm);
