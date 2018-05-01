@@ -1,6 +1,6 @@
 .boxed {
   align-items: center;
-  background: url('/img/money-bg.jpg');
+  background: url('/img/bg-3.jpg');
   background-size: cover;
   display: flex;
   height: 100vh;
@@ -9,9 +9,11 @@
 }
 
 .boxed__center {
-  background: #fff;
-  width: 30rem;
-  padding: $large-s;
+  font-size: $font-m;
+  border-radius: .25rem;
+  background: fade-out(#ffffff, .30);
+  padding: $medium-s $small-s;
+  position: relative;
   text-align: center;
 }
 
@@ -20,10 +22,15 @@
 }
 
 .boxed__text {
-  font-size: $font-m;
+  font-size: $font-s;
 }
 
 .boxed__text--title {
-  padding: $large-s $small-s;
+  padding: $medium-s $small-s;
   line-height: 1;
+}
+
+.boxed__padding {
+  padding-top: 5%;
+  width: 50vw;
 }

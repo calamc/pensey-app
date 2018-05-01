@@ -1,16 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { startLogin } from '../actions/authentication'
+import { startLogin, startFacebookLogin } from '../actions/authentication'
 
 
 // LOGIN COMPONENT { GOOGLE AUTH }
-export const Login = ({ startLogin }) => (
+export const Login = ({ startLogin, startFacebookLogin }) => (
     <div className="boxed">
-        <div className="boxed__center">
-            <div className="boxed__text">
-                <h1>Pensey</h1>
-                <p className="boxed__text--title">Manage all your expenses.</p>
-                <button className="btn btn__large" onClick={startLogin}>Login using Google Account</button>
+        <div className="boxed__padding">
+            <div className="boxed__center">
+                <div className="boxed__text">
+                    <h1 className="btn--h1">Pensey</h1>
+                    <p className="boxed__text--title">Manage all of your expenses in one place.</p>
+                    <button className="btn btn--login" onClick={startLogin}>
+                    <img src="/img/google.png" className="btn--login_google" />
+                    <span className="btn--login__text">Login using your Google Account</span></button>
+                    <button className="btn btn--login" onClick={startFacebookLogin}>
+                    <img src="/img/facebook.png" className="btn--login_google" />
+                    <span className="btn--login__text">Login using your Facebook Account</span></button>
+                </div>
             </div>
         </div>
     </div>
@@ -21,7 +28,8 @@ export const Login = ({ startLogin }) => (
 
 // DISPATCH Login
 const mapDispatchToProps = (dispatch) => ({
-    startLogin: () => dispatch(startLogin())
+    startLogin: () => dispatch(startLogin()),
+    startFacebookLogin: () => dispatch(startFacebookLogin())
 });
 
 // CONNECT REDUX

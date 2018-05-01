@@ -5,7 +5,7 @@ export default (expenses, { text, sortBy, startDate, endDate}) => {
         const createdAtTime = moment(expense.createdAt); // get created at datetime
         const startDateMatch = startDate ? startDate.isSameOrBefore(createdAtTime, 'day') : true; // ternary op - true/false
         const endDateMatch = endDate ? endDate.isSameOrAfter(createdAtTime, 'day') : true; // ternary op - true/false
-        const textMatch = expense.title.toLowerCase().includes(text.toLowerCase());
+        const textMatch = expense.title.toLowerCase().includes(text.toLowerCase()); // .includes MDN
 
         return startDateMatch && endDateMatch && textMatch;
         //return startDateMatch && endDateMatch;

@@ -33,19 +33,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(undefined, mapDispatchToProps)(AddExp);
-
-// const AddExp = (props) => (
-//     <div>
-//     <div className="dash-header">
-//         <div className="content">
-//             <h1 className="dash-header__title">Pensey: Create Expense</h1>
-//         </div>
-//     </div>
-//         <div className="content">
-//             <ExpenseForm onSubmit={(expense) => {
-//                 props.dispatch(addExpense(expense));
-//                 props.history.push('/');
-//             }}/>
-//         </div>
-//     </div>
-// );

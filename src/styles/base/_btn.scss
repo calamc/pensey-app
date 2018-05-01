@@ -26,3 +26,27 @@
     display: inline-block;
     text-decoration: none;
 }
+
+.btn--login {
+    display: flex;
+    margin: auto;
+    cursor: pointer;
+    margin-bottom: 10%;
+}
+
+.btn--login__text {
+    margin: 2px;
+}
+
+.btn--login_google {
+    width: auto;
+    height: 25px;
+    margin-right: $medium-s;
+}
+
+.btn--h1 {
+    color: $grey-primary;
+    font-size: $font-l;
+}
+
+

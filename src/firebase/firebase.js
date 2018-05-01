@@ -15,16 +15,11 @@ const database = firebase.database();
 
 // GOOGLE AUTHENTICATION LOGIN SYSTEM
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+// FACEBOOK AUTH
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-export { firebase, googleProvider, database as default };
-
-
-//   database.ref('isSingle').remove().then(() => {
-//     console.log('REMOVED');
-//   }).catch((e) => {
-//       console.log('DIDNT WORK', e);
-//   });
-
+export { firebase, googleProvider, facebookProvider, database as default };
+  // Testing below
   // database.ref().set({
   //   name: 'Cathal',
   //   age: 24,
@@ -42,27 +37,9 @@ export { firebase, googleProvider, database as default };
   // database.ref('age').set(28);
   // database.ref('location/city').set('Sligo');
 
-  // // att
-  // database.ref('att').set({
-  //   height: 88,
-  //   weight: 145
-  // }).then(() => {
-  //     console.log('2nd worked');
-  // }).catch((e) => {
-  //   console.log('Didnt work for 2nd err');
-  // });
-
-
-  // remove data
-//   database.ref('isSingle').set(null);
-
-// database.ref().once('value').then((snapshot) => {
-//   const val = snapshot.val();
-//   console.log(val);
-// }).catch((e) => {
-//   console.log('Error', e);
-// });
-
+// Rules for firebase database validation
+// I removed this though because it was casuing an error I couldn't solve
+// and left with read and write only
 // {
 //   "rules": {
 //     ".read": true,
