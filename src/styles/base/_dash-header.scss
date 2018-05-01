@@ -15,3 +15,18 @@
 .dash-header__createexp {
     margin-top: $medium-s;
 }
+
+.header-analytics {
+    background: transparent;
+    padding: $large-s 0;
+    margin-bottom: $large-s;
+
+    span {
+        font-weight: 700;
+    }
+}
+
+.dash-header__s {
+    font-weight: 700;
+    color: $pink;
+}
